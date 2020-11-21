@@ -1,6 +1,6 @@
 #### 1、运行时数据区域划分
 
-![image-20201121154723497](https://raw.githubusercontent.com/StuOfBupt/MyTypora/master/img/image-20201121154723497.png?token=AHMLWBOUGUOSYDIG2XXOKKS7XDDE2)
+![image-20201121160047072](https://raw.githubusercontent.com/StuOfBupt/MyTypora/master/img/image-20201121160047072.png?token=AHMLWBM4FNU6RC3V2XSEH4K7XDEXA)
 
 - ##### **方法区**：
 
