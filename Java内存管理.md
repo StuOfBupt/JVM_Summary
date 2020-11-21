@@ -1,5 +1,7 @@
 #### 1、运行时数据区域划分
 
+![image-20201121154723497](https://raw.githubusercontent.com/StuOfBupt/MyTypora/master/img/image-20201121154723497.png?token=AHMLWBOUGUOSYDIG2XXOKKS7XDDE2)
+
 - ##### **方法区**：
 
   - **线程共享**
@@ -59,10 +61,14 @@
 
 - 句柄访问
 
+  <img src="/Users/wangshangrong/Library/Application Support/typora-user-images/image-20201121154222452.png" alt="image-20201121154222452" style="zoom:50%;" />
+
   - 优点：reference中存储的是稳定的句柄地址，在对象被移动时（eg.垃圾回收整理），只会改变句柄中的实例数据指针，reference不需要改变。
   - 缺点：多一次指针定位的开销
 
 - 指针访问
+
+  <img src="/Users/wangshangrong/Library/Application Support/typora-user-images/image-20201121154315930.png" alt="image-20201121154315930" style="zoom:50%;" />
 
   - 优点：速度快，节省一次指针定位的时间开销（对象访问十分频繁）
   - 缺点：对象位置改变时reference也需要改变
