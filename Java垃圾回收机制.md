@@ -76,7 +76,21 @@
     - 主动式终端：不直接对线程操作，仅仅简单地设置一个标志位，各个线程执行过程时会不停地主动去**轮询**这个标志，一旦发现中断标志为真时就自己在最近的安全点上主动中断挂起。**轮询标志的地方和安全点是重合的**，另外**还要加上**所有创建对象和其他需要在Java堆上分配内存的地方，这是为了检查是否即将要发生垃圾收集，避免没有足够内存分配新对象。
 
       **轮询指令逻辑:轮询指令跟在OOP指令后面，每当经过OOP后立即执行轮询指令。这里，当需要进行垃圾回收时，虚拟机将0x160100的内存页设置为不可读，然后用户线程执行这个指令，访问内存页触发中断（内存保护陷阱，访问了一个不可读的内存页），然后通过在预先设置的异常处理器中挂起当前线程实现等待。**
-      ![image-20201121201621826](https://raw.githubusercontent.com/StuOfBupt/MyTypora/master/img/image-20201121201621826.png?token=AHMLWBM4CZXXGXY2S7TBNVC7XECVS)
+      
+      ```c
+      0x01b6d627: call 0x01b2b210 				; OopMap{[60]=Oop off=460} 	安全点
+      																		; *invokeinterface size 
+      																		; - Client1::main@113 (line 23) 
+      																		; {virtual_call} 
+      0x01b6d62c: nop 										; OopMap{[60]=Oop off=461} 
+      																		; *if_icmplt 
+      																		; - Client1::main@118 (line 23) 
+      0x01b6d62d: test %eax,0x160100 			; {poll}  轮询指令，访问0x160100所在的内存页
+      0x01b6d633: mov 0x50(%esp),%esi
+      0x01b6d637: cmp %eax,%esi
+      ```
+      
+      
 
 - **安全区域**：
 
